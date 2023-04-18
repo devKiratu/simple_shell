@@ -9,5 +9,6 @@
 #include <string.h>
 
 void execute_path(char *path, char *name, char *envp[]);
+char **create_argv(char *s);
 
 #endif

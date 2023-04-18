@@ -7,9 +7,9 @@
  * @envp: environment variables vector
  * Return: 0 success
  */
-int main(int ac, char *av[], char *envp[])
+int main(int ac __attribute__((unused)), char *av[], char *envp[])
 {
-	char *buffer, *token;
+	char *buffer;
 	size_t n = 8;
 	ssize_t count = 0;
 
@@ -25,27 +25,22 @@ int main(int ac, char *av[], char *envp[])
 		printf("#cisfun$ ");
 
 		count = getline(&buffer, &n, stdin);
-		token = strtok(buffer, " \n");
-		execute_path(token, av[0], envp);
+		execute_path(buffer, av[0], envp);
 	}
-	(void)ac;
 	return (0);
 }
 
 /**
  * execute_path - executes command in @path via execve
- * @path: absolute path of command to execute
+ * @buffer: pointer to command string
  * @name: name of executing program
  * @envp: environemnt vairables array
  * Return: void
  */
-void execute_path(char *path, char *name, char *envp[])
+void execute_path(char *buffer, char *name, char *envp[])
 {
 	pid_t pid;
-	char *argv[2];
-
-	argv[0] = path;
-	argv[1] = NULL;
+	char **argv = create_argv(buffer);
 
 	pid = fork();
 	if (pid == -1)
