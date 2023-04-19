@@ -1,5 +1,6 @@
 #include "main.h"
 #define EXITCMD "exit"
+#define ENVCMD "env"
 
 /**
  * main - entry point to shell
@@ -40,11 +41,19 @@ int main(int ac __attribute__((unused)), char *av[], char *envp[])
  */
 void process_input(char *buffer, char *name, char *envp[])
 {
+	unsigned int i;
 	char **argv = create_argv(buffer);
 
 	/* Check for `exit` command */
 	if (strcmp(argv[0], EXITCMD) == 0)
 		exit(0);
+
+	/* Check for 'env' command */
+	if (strcmp(argv[0], ENVCMD) == 0)
+	{
+		for (i = 0; envp[i] != NULL; i++)
+			printf("%s\n", envp[i]);
+	}
 
 	/* Check if argv[0] is a path or standalone command*/
 	if (strstr(argv[0], "/") == NULL)
