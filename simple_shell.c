@@ -1,4 +1,5 @@
 #include "main.h"
+#define EXITCMD "exit"
 
 /**
  * main - entry point to shell
@@ -41,6 +42,10 @@ void execute_path(char *buffer, char *name, char *envp[])
 {
 	pid_t pid;
 	char **argv = create_argv(buffer);
+
+	/* Check for `exit` command */
+	if (strcmp(argv[0], EXITCMD) == 0)
+		exit(0);
 
 	pid = fork();
 	if (pid == -1)
