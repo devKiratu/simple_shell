@@ -46,7 +46,23 @@ void process_input(char *buffer, char *name, char *envp[])
 	if (strcmp(argv[0], EXITCMD) == 0)
 		exit(0);
 
-	execute_path(argv, name, envp);
+	/* Check if argv[0] is a path or standalone command*/
+	if (strstr(argv[0], "/") == NULL)
+	{
+		if (create_full_path(argv[0], &argv) == NULL)
+		{
+			/*TODO: handle error correctly*/
+			printf("%s: No such file or directory\n", name);
+		}
+		else
+		{
+			execute_path(argv, name, envp);
+		}
+	}
+	else
+	{
+		execute_path(argv, name, envp);
+	}
 }
 
 /**

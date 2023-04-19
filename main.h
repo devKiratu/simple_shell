@@ -11,5 +11,6 @@
 void process_input(char *buffer, char *name, char *envp[]);
 char **create_argv(char *s);
 void execute_path(char *argv[], char *name, char *envp[]);
+char *create_full_path(char *cmd, char ***argv);
 
 #endif
