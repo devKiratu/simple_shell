@@ -8,7 +8,8 @@
 #include <sys/wait.h>
 #include <string.h>
 
-void execute_path(char *path, char *name, char *envp[]);
+void process_input(char *buffer, char *name, char *envp[]);
 char **create_argv(char *s);
+void execute_path(char *argv[], char *name, char *envp[]);
 
 #endif

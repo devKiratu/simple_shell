@@ -26,26 +26,39 @@ int main(int ac __attribute__((unused)), char *av[], char *envp[])
 		printf("#cisfun$ ");
 
 		count = getline(&buffer, &n, stdin);
-		execute_path(buffer, av[0], envp);
+		process_input(buffer, av[0], envp);
 	}
 	return (0);
 }
 
 /**
- * execute_path - executes command in @path via execve
+ * process_input - processes commands received via @buffer for execution
  * @buffer: pointer to command string
  * @name: name of executing program
  * @envp: environemnt vairables array
  * Return: void
  */
-void execute_path(char *buffer, char *name, char *envp[])
+void process_input(char *buffer, char *name, char *envp[])
 {
-	pid_t pid;
 	char **argv = create_argv(buffer);
 
 	/* Check for `exit` command */
 	if (strcmp(argv[0], EXITCMD) == 0)
 		exit(0);
+
+	execute_path(argv, name, envp);
+}
+
+/**
+ * execute_path - does the actual execution of the processed commands
+ * @argv: commands array
+ * @name: name of the executing program
+ * @envp: environment variables array
+ * Return: void
+ */
+void execute_path(char *argv[], char *name, char *envp[])
+{
+	pid_t pid;
 
 	pid = fork();
 	if (pid == -1)
