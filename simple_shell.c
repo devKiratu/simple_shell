@@ -46,7 +46,11 @@ void process_input(char *buffer, char *name, char *envp[])
 
 	/* Check for `exit` command */
 	if (strcmp(argv[0], EXITCMD) == 0)
+	{
+		if (argv[1] != NULL)
+			exit(atoi(argv[1]));
 		exit(0);
+	}
 
 	/* Check for 'env' command */
 	if (strcmp(argv[0], ENVCMD) == 0)
