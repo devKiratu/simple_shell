@@ -20,7 +20,7 @@ char **create_argv(char *s)
 	}
 
 	/* Allocate memory for arr */
-	arr = malloc(sizeof(char *) * (len + 1));
+	arr = malloc(sizeof(char *) * (len + 2));
 	if (arr == NULL)
 		return (NULL);
 

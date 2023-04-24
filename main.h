@@ -8,9 +8,13 @@
 #include <sys/wait.h>
 #include <string.h>
 
-void process_input(char *buffer, char *name, char *envp[]);
+extern char **environ;
+
+void process_input(char **argv, char *name, char *envp[]);
 char **create_argv(char *s);
 void execute_path(char *argv[], char *name, char *envp[]);
 char *create_full_path(char *cmd, char ***argv);
+int _setenv(char *argv[], char *name);
+int handle_env_update(char *key, char *new_var, char *name);
 
 #endif
