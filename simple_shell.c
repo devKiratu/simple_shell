@@ -13,20 +13,20 @@
  */
 int main(int ac __attribute__((unused)), char *av[], char *envp[])
 {
-	char *buffer, **argv;
-	size_t n;
-	ssize_t count = 0;
+	char *buffer = NULL, **argv;
+	size_t n = 0;
 
-	while (count != -1)
+	printf("#cisfun$ ");
+
+	while (getline(&buffer, &n, stdin) != -1)
 	{
-		printf("#cisfun$ ");
-
-		count = getline(&buffer, &n, stdin);
 		argv = create_argv(buffer);
 		process_input(argv, av[0], envp);
+		free_argv(argv);
+		printf("#cisfun$ ");
 	}
+
 	free(buffer);
-	free(argv);
 	return (0);
 }
 
@@ -46,15 +46,18 @@ void process_input(char **argv, char *name, char *envp[])
 	/* Check if argv[0] is a path or standalone command*/
 	if (strstr(argv[0], "/") == NULL)
 	{
-		if (create_full_path(argv[0], &argv) == NULL)
+		char *full_path = create_full_path(argv[0], &argv);
+
+		if (full_path == NULL)
 		{
-			/*TODO: handle error correctly*/
-			printf("%s: No such file or directory\n", name);
+			fprintf(stderr, "%s: No such file or directory\n", name);
 		}
 		else
 		{
 			execute_path(argv, name, envp);
 		}
+		free(full_path);
+
 	}
 	else
 	{
@@ -87,8 +90,11 @@ int handle_special_commands(char **argv, char *name)
 	if (strcmp(argv[0], EXITCMD) == 0)
 	{
 		if (argv[1] != NULL)
+		{
+			free_argv(argv);
 			exit(atoi(argv[1]));
-		free(argv);
+		}
+		free_argv(argv);
 		exit(0);
 	}
 	/* Check for 'env' command */
@@ -122,5 +128,22 @@ void execute_path(char *argv[], char *name, char *envp[])
 	}
 
 	wait(NULL);
+}
+
+/**
+ * free_argv - frees the array of commands created
+ * @argv: array of commands to free
+ * Return: void
+ */
+void free_argv(char **argv)
+{
+	int i = 0;
+
+	while (argv[i] != NULL)
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv[i]);
 	free(argv);
 }

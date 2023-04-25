@@ -8,24 +8,20 @@
  */
 char **create_argv(char *s)
 {
-	char *token, **arr, *delim = " \n";
+	char *token, **arr, *delim = " \n", *str = strdup(s);
 	int len = 0, i = 0, j = 0;
-
 	/* Get length of s */
-	while (s[i] != '\0')
+	while (str[i] != '\0')
 	{
-		if (s[i] == ' ')
+		if (str[i] == ' ')
 			len++;
 		i++;
 	}
-
 	/* Allocate memory for arr */
 	arr = malloc(sizeof(char *) * (len + 2));
 	if (arr == NULL)
 		return (NULL);
-
-	token = strtok(s, delim);
-
+	token = strtok(str, delim);
 	while (token != NULL)
 	{
 		/* copy token to array */
@@ -37,7 +33,6 @@ char **create_argv(char *s)
 			free(arr);
 			break;
 		}
-
 		/* copy token to array */
 		strcpy(arr[j], token);
 
@@ -47,5 +42,6 @@ char **create_argv(char *s)
 		token = strtok(NULL, delim);
 	}
 	arr[j] = NULL;
+	free(str);
 	return (arr);
 }

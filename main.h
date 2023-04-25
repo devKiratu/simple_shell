@@ -18,5 +18,6 @@ char *create_full_path(char *cmd, char ***argv);
 int _setenv(char *argv[], char *name);
 int handle_env_update(char *key, char *new_var, char *name);
 int _unsetenv(char *argv[], char *name);
+void free_argv(char **argv);
 
 #endif

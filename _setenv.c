@@ -9,6 +9,7 @@
 int _setenv(char *argv[], char *name)
 {
 	char *new_var, *key, *val;
+	int status;
 
 	if (argv[1] == NULL || argv[2] == NULL)
 	{
@@ -25,7 +26,8 @@ int _setenv(char *argv[], char *name)
 		return (-1);
 	}
 	sprintf(new_var, "%s=%s", key, val);
-	return (handle_env_update(key, new_var, name));
+	status = handle_env_update(key, new_var, name);
+	return (status);
 }
 
 /**
