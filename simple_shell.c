@@ -2,6 +2,7 @@
 #define EXITCMD "exit"
 #define ENVCMD "env"
 #define SETENV "setenv"
+#define UNSETENV "unsetenv"
 
 /**
  * main - entry point to shell
@@ -38,27 +39,10 @@ int main(int ac __attribute__((unused)), char *av[], char *envp[])
  */
 void process_input(char **argv, char *name, char *envp[])
 {
-	unsigned int i;
-	/* check for setenv */
-	if (strcmp(argv[0], SETENV) == 0)
-	{
-		_setenv(argv, name);
+	/* handle special commands e.g. exit, setenv, unsetenv etc */
+	if (handle_special_commands(argv, name) == 0)
 		return;
-	}
-	/* Check for `exit` command */
-	if (strcmp(argv[0], EXITCMD) == 0)
-	{
-		if (argv[1] != NULL)
-			exit(atoi(argv[1]));
-		free(argv);
-		exit(0);
-	}
-	/* Check for 'env' command */
-	if (strcmp(argv[0], ENVCMD) == 0)
-	{
-		for (i = 0; environ[i] != NULL; i++)
-			printf("%s\n", environ[i]);
-	}
+
 	/* Check if argv[0] is a path or standalone command*/
 	if (strstr(argv[0], "/") == NULL)
 	{
@@ -76,6 +60,45 @@ void process_input(char **argv, char *name, char *envp[])
 	{
 		execute_path(argv, name, envp);
 	}
+}
+
+/**
+ * handle_special_commands - checks for commands, executable as they are
+ * @argv: commands array
+ * @name: name of executing program
+ * Return: 0 if any command is executed, 1 if none is executed
+ */
+int handle_special_commands(char **argv, char *name)
+{
+	unsigned int i;
+	/* check for setenv */
+	if (strcmp(argv[0], SETENV) == 0)
+	{
+		_setenv(argv, name);
+		return (0);
+	}
+	/* Check for unsetenv */
+	if (strcmp(argv[0], UNSETENV) == 0)
+	{
+		_unsetenv(argv, name);
+		return (0);
+	}
+	/* Check for `exit` command */
+	if (strcmp(argv[0], EXITCMD) == 0)
+	{
+		if (argv[1] != NULL)
+			exit(atoi(argv[1]));
+		free(argv);
+		exit(0);
+	}
+	/* Check for 'env' command */
+	if (strcmp(argv[0], ENVCMD) == 0)
+	{
+		for (i = 0; environ[i] != NULL; i++)
+			printf("%s\n", environ[i]);
+		return (0);
+	}
+	return (1);
 }
 
 /**
