@@ -1,8 +1,4 @@
 #include "main.h"
-#define EXITCMD "exit"
-#define ENVCMD "env"
-#define SETENV "setenv"
-#define UNSETENV "unsetenv"
 
 /**
  * main - entry point to shell

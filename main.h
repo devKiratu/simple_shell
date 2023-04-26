@@ -1,5 +1,9 @@
 #ifndef MAIN_H
 #define MAIN_H
+#define EXITCMD "exit"
+#define ENVCMD "env"
+#define SETENV "setenv"
+#define UNSETENV "unsetenv"
 
 #include <stdio.h>
 #include <stdlib.h>
