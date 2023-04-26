@@ -20,7 +20,7 @@ char *create_full_path(char *cmd, char ***argv)
 		if (full_path == NULL)
 			return (NULL);
 
-		sprintf(full_path, "%s/%s", base_path, cmd);
+		concat_str(full_path, "/", base_path, cmd);
 		if (access(full_path, F_OK) == 0)
 		{
 			free(*argv[0]);

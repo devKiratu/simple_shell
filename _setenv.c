@@ -26,7 +26,7 @@ int _setenv(char *argv[], char *name)
 		perror(name);
 		return (-1);
 	}
-	sprintf(new_var, "%s=%s", key, val);
+	concat_str(new_var, "=", key, val);
 	status = handle_env_update(key, new_var, name);
 	return (status);
 }
