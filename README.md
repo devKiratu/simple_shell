@@ -9,3 +9,6 @@ Setenv
 Unsetenv
 Path
 Exit
+Comments
+Getline
+Strtok
