@@ -5,22 +5,24 @@
  * @ac: arguments count
  * @av: arguments array
  * @envp: environment variables vector
- *
+ 
  * Return: 0 success
  */
 int main(int ac __attribute__((unused)), char *av[], char *envp[])
 {
 	char *buffer = NULL, **argv, *prompt = "#cisfun$ ";
 	size_t n = 0;
-
-	write(1, prompt, 10);
+	
+	if (isatty(STDIN_FILENO))
+		write(1, prompt, 10);
 
 	while (getline(&buffer, &n, stdin) != -1)
 	{
 		argv = create_argv(buffer);
 		process_input(argv, av[0], envp);
 		free_argv(argv);
-		write(1, prompt, 10);
+		if (isatty(STDIN_FILENO))
+			write(1, prompt, 10);
 	}
 
 	free(buffer);
