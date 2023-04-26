@@ -13,17 +13,17 @@
  */
 int main(int ac __attribute__((unused)), char *av[], char *envp[])
 {
-	char *buffer = NULL, **argv;
+	char *buffer = NULL, **argv, *prompt = "#cisfun$ ";
 	size_t n = 0;
 
-	printf("#cisfun$ ");
+	write(1, prompt, 10);
 
 	while (getline(&buffer, &n, stdin) != -1)
 	{
 		argv = create_argv(buffer);
 		process_input(argv, av[0], envp);
 		free_argv(argv);
-		printf("#cisfun$ ");
+		write(1, prompt, 10);
 	}
 
 	free(buffer);
