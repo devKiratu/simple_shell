@@ -74,19 +74,22 @@ void process_input(char **argv, char *name, char *envp[])
 int handle_special_commands(char **argv, char *name)
 {
 	unsigned int i;
-	/* check for setenv */
+
+	if (_strcmp(argv[0], CD_CMD) == 0)
+	{
+		handle_cd(argv[1]);
+		return (0);
+	}
 	if (_strcmp(argv[0], SETENV) == 0)
 	{
 		_setenv(argv, name);
 		return (0);
 	}
-	/* Check for unsetenv */
 	if (_strcmp(argv[0], UNSETENV) == 0)
 	{
 		_unsetenv(argv, name);
 		return (0);
 	}
-	/* Check for `exit` command */
 	if (_strcmp(argv[0], EXITCMD) == 0)
 	{
 		if (argv[1] != NULL)

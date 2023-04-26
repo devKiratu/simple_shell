@@ -4,6 +4,7 @@
 #define ENVCMD "env"
 #define SETENV "setenv"
 #define UNSETENV "unsetenv"
+#define CD_CMD "cd"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,6 +24,7 @@ int _setenv(char *argv[], char *name);
 int handle_env_update(char *key, char *new_var, char *name);
 int _unsetenv(char *argv[], char *name);
 void free_argv(char **argv);
+int handle_cd(char *s);
 
 /* Helper functions */
 int _atoi(char *s);
