@@ -13,23 +13,25 @@ int _unsetenv(char *argv[], char *name)
 
 	if (argv[1] == NULL)
 	{
-		fprintf(stderr, "%s: Usage - unsetenv VARIABLE\n", name);
+		write(2, name, strlen(name) + 1);
+		write(2, ": Usage - unsetenv VARIABLE\n", 29);
 		return (-1);
 	}
 	key = argv[1];
-
 	if (getenv(key) == NULL)
 	{
-		fprintf(stderr, "%s: %s doesn't exist\n", name, key);
+		write(2, name, strlen(name) + 1);
+		write(2, ": ", 3);
+		write(2, key, strlen(key) + 1);
+		write(2, " doesn't exist\n", 16);
 		return (0);
 	}
-
 	while (environ[i] != NULL)
 		i++;
 	new_env = malloc(sizeof(char *) * i);
 	if (new_env == NULL)
 	{
-		fprintf(stderr, "%s: Can't update env list", name);
+		perror(name);
 		return (-1);
 	}
 	while (k < i)

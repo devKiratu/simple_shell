@@ -13,7 +13,8 @@ int _setenv(char *argv[], char *name)
 
 	if (argv[1] == NULL || argv[2] == NULL)
 	{
-		fprintf(stderr, "%s: Usage - setenv VARIABLE VALUE\n", name);
+		write(2, name, strlen(name) + 1);
+		write(2, ": Usage - setenv VARIABLE VALUE\n", 33);
 		return (-1);
 	}
 	key = argv[1];
@@ -22,7 +23,7 @@ int _setenv(char *argv[], char *name)
 	new_var = malloc(strlen(key) + strlen(val) + 2);
 	if (new_var == NULL)
 	{
-		fprintf(stderr, "%s: Could not initialize new variable", name);
+		perror(name);
 		return (-1);
 	}
 	sprintf(new_var, "%s=%s", key, val);
@@ -57,7 +58,7 @@ int handle_env_update(char *key, char *new_var, char *name)
 	new_env = malloc(sizeof(char *) * (i + 2));
 	if (new_env == NULL)
 	{
-		fprintf(stderr, "%s: Could not update env list", name);
+		perror(name);
 		return (-1);
 	}
 

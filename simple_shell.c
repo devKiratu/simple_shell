@@ -48,7 +48,7 @@ void process_input(char **argv, char *name, char *envp[])
 
 		if (full_path == NULL)
 		{
-			fprintf(stderr, "%s: No such file or directory\n", name);
+			perror(name);
 		}
 		else
 		{
@@ -100,7 +100,10 @@ int handle_special_commands(char **argv, char *name)
 	if (strcmp(argv[0], ENVCMD) == 0)
 	{
 		for (i = 0; environ[i] != NULL; i++)
-			printf("%s\n", environ[i]);
+		{
+			write(1, environ[i], strlen(environ[i]) + 1);
+			write(1, "\n", 1);
+		}
 		return (0);
 	}
 	return (1);
