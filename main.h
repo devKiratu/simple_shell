@@ -24,4 +24,7 @@ int handle_env_update(char *key, char *new_var, char *name);
 int _unsetenv(char *argv[], char *name);
 void free_argv(char **argv);
 
+/* Helper functions */
+int _atoi(char *s);
+
 #endif
