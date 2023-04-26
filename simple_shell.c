@@ -5,6 +5,7 @@
  * @ac: arguments count
  * @av: arguments array
  * @envp: environment variables vector
+ *
  * Return: 0 success
  */
 int main(int ac __attribute__((unused)), char *av[], char *envp[])
@@ -31,6 +32,7 @@ int main(int ac __attribute__((unused)), char *av[], char *envp[])
  * @argv: pointer to command string
  * @name: name of executing program
  * @envp: environemnt vairables array
+ *
  * Return: void
  */
 void process_input(char **argv, char *name, char *envp[])
@@ -65,6 +67,7 @@ void process_input(char **argv, char *name, char *envp[])
  * handle_special_commands - checks for commands, executable as they are
  * @argv: commands array
  * @name: name of executing program
+ *
  * Return: 0 if any command is executed, 1 if none is executed
  */
 int handle_special_commands(char **argv, char *name)
@@ -108,6 +111,7 @@ int handle_special_commands(char **argv, char *name)
  * @argv: commands array
  * @name: name of the executing program
  * @envp: environment variables array
+ *
  * Return: void
  */
 void execute_path(char *argv[], char *name, char *envp[])
@@ -129,6 +133,7 @@ void execute_path(char *argv[], char *name, char *envp[])
 /**
  * free_argv - frees the array of commands created
  * @argv: array of commands to free
+ *
  * Return: void
  */
 void free_argv(char **argv)
