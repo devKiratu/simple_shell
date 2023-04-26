@@ -91,8 +91,10 @@ int handle_special_commands(char **argv, char *name)
 	{
 		if (argv[1] != NULL)
 		{
+			int exit_code = _atoi(argv[1]);
+
 			free_argv(argv);
-			exit(_atoi(argv[1]));
+			exit(exit_code);
 		}
 		free_argv(argv);
 		exit(0);
