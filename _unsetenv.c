@@ -18,7 +18,7 @@ int _unsetenv(char *argv[], char *name)
 		return (-1);
 	}
 	key = argv[1];
-	if (getenv(key) == NULL)
+	if (_getenv(key) == NULL)
 	{
 		write(2, name, _strlen(name) + 1);
 		write(2, ": ", 3);

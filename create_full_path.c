@@ -10,7 +10,7 @@ char *create_full_path(char *cmd, char ***argv)
 {
 	char *path, *base_path, *full_path, *path_ptr;
 
-	path = _strdup(getenv("PATH"));
+	path = _strdup(_getenv("PATH"));
 	path_ptr = path;
 	base_path = strtok(path, ":");
 
