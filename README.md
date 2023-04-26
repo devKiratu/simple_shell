@@ -7,4 +7,5 @@ Implementation:
 Prompt
 Setenv
 Unsetenv
-
+Path
+Exit
