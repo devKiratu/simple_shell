@@ -42,7 +42,7 @@ void process_input(char **argv, char *name, char *envp[])
 		return;
 
 	/* Check if argv[0] is a path or standalone command*/
-	if (strstr(argv[0], "/") == NULL)
+	if (_strstr(argv[0], "/") == NULL)
 	{
 		char *full_path = create_full_path(argv[0], &argv);
 
@@ -74,19 +74,19 @@ int handle_special_commands(char **argv, char *name)
 {
 	unsigned int i;
 	/* check for setenv */
-	if (strcmp(argv[0], SETENV) == 0)
+	if (_strcmp(argv[0], SETENV) == 0)
 	{
 		_setenv(argv, name);
 		return (0);
 	}
 	/* Check for unsetenv */
-	if (strcmp(argv[0], UNSETENV) == 0)
+	if (_strcmp(argv[0], UNSETENV) == 0)
 	{
 		_unsetenv(argv, name);
 		return (0);
 	}
 	/* Check for `exit` command */
-	if (strcmp(argv[0], EXITCMD) == 0)
+	if (_strcmp(argv[0], EXITCMD) == 0)
 	{
 		if (argv[1] != NULL)
 		{
@@ -97,11 +97,11 @@ int handle_special_commands(char **argv, char *name)
 		exit(0);
 	}
 	/* Check for 'env' command */
-	if (strcmp(argv[0], ENVCMD) == 0)
+	if (_strcmp(argv[0], ENVCMD) == 0)
 	{
 		for (i = 0; environ[i] != NULL; i++)
 		{
-			write(1, environ[i], strlen(environ[i]) + 1);
+			write(1, environ[i], _strlen(environ[i]) + 1);
 			write(1, "\n", 1);
 		}
 		return (0);

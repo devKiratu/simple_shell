@@ -8,7 +8,7 @@
  */
 char **create_argv(char *s)
 {
-	char *token, **arr, *delim = " \n", *str = strdup(s);
+	char *token, **arr, *delim = " \n", *str = _strdup(s);
 	int len = 0, i = 0, j = 0;
 	/* Get length of s */
 	while (str[i] != '\0')
@@ -24,10 +24,10 @@ char **create_argv(char *s)
 	token = strtok(str, delim);
 	while (token != NULL)
 	{
-		if (strstr(token, "#") != NULL)
+		if (_strstr(token, "#") != NULL)
 			break;
 		/* copy token to array */
-		arr[j] = malloc(sizeof(char) * (strlen(token) + 1));
+		arr[j] = malloc(sizeof(char) * (_strlen(token) + 1));
 		if (arr[j] == NULL)
 		{
 			while (j > 0)
@@ -36,7 +36,7 @@ char **create_argv(char *s)
 			break;
 		}
 		/* copy token to array */
-		strcpy(arr[j], token);
+		_strcpy(arr[j], token);
 
 		j++;
 

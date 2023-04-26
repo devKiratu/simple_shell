@@ -13,14 +13,14 @@ int _setenv(char *argv[], char *name)
 
 	if (argv[1] == NULL || argv[2] == NULL)
 	{
-		write(2, name, strlen(name) + 1);
+		write(2, name, _strlen(name) + 1);
 		write(2, ": Usage - setenv VARIABLE VALUE\n", 33);
 		return (-1);
 	}
 	key = argv[1];
 	val = argv[2];
 
-	new_var = malloc(strlen(key) + strlen(val) + 2);
+	new_var = malloc(_strlen(key) + _strlen(val) + 2);
 	if (new_var == NULL)
 	{
 		perror(name);
@@ -46,7 +46,7 @@ int handle_env_update(char *key, char *new_var, char *name)
 	/* overwrite variable if exists */
 	while (environ[i] != NULL)
 	{
-		if (strstr(environ[i], key) != NULL)
+		if (_strstr(environ[i], key) != NULL)
 		{
 			environ[i] = new_var;
 			return (0);

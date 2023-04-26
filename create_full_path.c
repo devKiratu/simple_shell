@@ -10,13 +10,13 @@ char *create_full_path(char *cmd, char ***argv)
 {
 	char *path, *base_path, *full_path, *path_ptr;
 
-	path = strdup(getenv("PATH"));
+	path = _strdup(getenv("PATH"));
 	path_ptr = path;
 	base_path = strtok(path, ":");
 
 	while (base_path != NULL)
 	{
-		full_path = malloc(strlen(base_path) + 1 + strlen(cmd) + 1);
+		full_path = malloc(_strlen(base_path) + 1 + _strlen(cmd) + 1);
 		if (full_path == NULL)
 			return (NULL);
 
@@ -24,11 +24,11 @@ char *create_full_path(char *cmd, char ***argv)
 		if (access(full_path, F_OK) == 0)
 		{
 			free(*argv[0]);
-			*argv[0] = malloc(sizeof(char) * (strlen(full_path) + 1));
+			*argv[0] = malloc(sizeof(char) * (_strlen(full_path) + 1));
 			if (*argv[0] == NULL)
 				return (NULL);
 
-			strcpy(*argv[0], full_path);
+			_strcpy(*argv[0], full_path);
 			free(path_ptr);
 			return (full_path);
 		}
