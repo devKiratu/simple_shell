@@ -3,12 +3,10 @@ Last project of ALX SWE Sprint 1
 
 Implementation:
 ---------------
-
-Prompt
-Setenv
-Unsetenv
-Path
-Exit
-Comments
-Getline
-Strtok
+* Prompt
+* Setenv
+* Unsetenv
+* Path
+* Exit
+* Comments
+* cd
