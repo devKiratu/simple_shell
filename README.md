@@ -1,4 +1,4 @@
-# simple_shell
+# Project: 0x16. C - Simple Shell
 Last project of ALX SWE Sprint 1
 
 Implementation:
@@ -10,3 +10,4 @@ Implementation:
 * Exit
 * Comments
 * cd
+* Handling commands
