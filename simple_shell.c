@@ -38,6 +38,9 @@ int main(int ac __attribute__((unused)), char *av[], char *envp[])
  */
 void process_input(char **argv, char *name, char *envp[])
 {
+	/* handle empty commands */
+	if (argv[0] == NULL)
+		return;
 	/* handle special commands e.g. exit, setenv, unsetenv etc */
 	if (handle_special_commands(argv, name) == 0)
 		return;

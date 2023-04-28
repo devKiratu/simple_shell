@@ -24,7 +24,7 @@ char **create_argv(char *s)
 	token = strtok(str, delim);
 	while (token != NULL)
 	{
-		if (_strstr(token, "#") != NULL)
+		if (token[0] == '#')
 			break;
 		/* copy token to array */
 		arr[j] = malloc(sizeof(char) * (_strlen(token) + 1));
