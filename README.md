@@ -1,8 +1,8 @@
 # Project: 0x16. C - Simple Shell
 Last project of ALX SWE Sprint 1
 
-Implementation:
----------------
+Implementations:
+----------------
 * Prompt
 * Setenv
 * Unsetenv
